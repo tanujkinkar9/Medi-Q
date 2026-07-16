@@ -3,7 +3,7 @@ function Landing(){
         <div className="min-h-screen bg-white">
             
             {/*Navbar*/}
-            <nav className="bg-white flex items-center justify-between px-8 py-4 border-b-1">
+            <nav className="bg-white flex items-center justify-between px-8 py-4 border-b border-outline-varient">
 
                 {/*Left - Logo */}
                 <span className="font-bold text-xl" style={{color: '#630ed4'}}>Medi-Q</span>
@@ -61,10 +61,29 @@ function Landing(){
                         <h3 className="text-lg font-bold text-gray-900 mb-2">Book Appointment</h3>
                         <p className="text-gray-500 text-sm mb-4">Schedule a preferred time for non-urgent consultations and specialist visits.</p>
                         <a href="#" className="text-sm font-bold flex items-center gap-1" style={{color:'#7c3aed'}}>
-                            Schedule Now →
+                            Schedule Now ➔
                         </a>
                     </div>
                 </div>
+            </section>
+            {/*Scan section*/}
+            <section className="flex items-center justify-between px-20 py-16 bg-white"
+              style={{borderTop: '1px solid #ccc3d8', borderBottom: '2px solid #ccc3d8'}}>
+                <div className="max-w-md">
+                    <h2 className="text-4xl font-bold text-gray-900 mb-4">
+                        Scan to Join
+                        </h2>
+                    
+                    <p className="text-gray-500 text-base leading-relaxed">
+                        Scan this code at the clinic to instantly join the live queue. No app download required.
+                        </p>
+                </div>
+
+                <div className="w-48 h-48 rounded-xl flex items-center justify-center text-gray-400 text-sm font-medium"
+                style={{border:'1px solid #ede9fb',background:'#faf9ff'}}>
+                    QR 
+                    </div>
+
             </section>
         </div>
     )
