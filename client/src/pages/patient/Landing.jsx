@@ -67,8 +67,7 @@ function Landing(){
                 </div>
             </section>
             {/*Scan section*/}
-            <section className="flex items-center justify-between px-20 py-16 bg-white"
-              style={{borderTop: '1px solid #ccc3d8', borderBottom: '2px solid #ccc3d8'}}>
+            <section className="flex items-center justify-between px-20 py-16" style={{background:'#fef7ff', borderBottom:'1px solid #cc3d8'}}>
                 <div className="max-w-md">
                     <h2 className="text-4xl font-bold text-gray-900 mb-4">
                         Scan to Join
@@ -80,8 +79,89 @@ function Landing(){
                 </div>
 
                 <div className="w-48 h-48 rounded-xl flex items-center justify-center text-gray-400 text-sm font-medium"
-                style={{border:'1px solid #ede9fb',background:'#faf9ff'}}>
+                style={{border:'1px solid #0e0e0f',background:'#faf9ff'}}>
                     QR 
+                    </div>
+
+            </section>
+
+            {/*status bar*/}
+            <div className="flex" style={{background:'#fef7ff',border:'1px solid #ccc3d8',borderRadius:'12px',margin:'40px 60px'}}>
+
+                {/*current*/}
+                <div className="flex-1 text-center py-6">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">Current patient</p>
+                    <p className="text-3xl font-bold" style={{color:'#7c3aed'}}>#A-402</p>
+                </div>
+
+                {/*Divider*/}
+                <div style={{width: '1px',background:'#ccc3d8'}}></div>
+
+                {/*Avg Wait Time*/}
+                <div className="flex-1 text-center py-6">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">Avg Wait Time</p>
+                    <p className="text-3xl font-bold text-gray-900">14 min</p>
+                </div>
+
+                {/*Divider*/}
+                <div style={{width: '1px',background:'#ccc3d8'}}></div>
+
+                {/*Patients Waiting*/}
+                <div className="flex-1 text-center py-6">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">Patients Waiting</p>
+                    <p className="text-3xl font-bold text-gray-900">08</p>
+                </div>
+            </div>
+
+            {/*Feature Section*/}
+            <section className="flex items-center justify-between px-20 py-16">
+
+                {/*Left - Text*/}
+                <div className="mix-w-sm">
+                    <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{color:'#7c3aed'}}>
+                        Efficiency Reimagined
+                    </p>
+                    <h2 className="text-4xl font-bold text-gray-900 mb-10 leading-tight">
+                        Modern tools for the digital patient.
+                    </h2>
+
+                    {/*Feature 1*/}
+                    <div className="flex items-start gap-4 mb-6">
+                        <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style={{background:'#f3ebfa'}}>
+                            <span>🔄</span>
+                        </div>
+                        <div>
+                            <p className="font-semibold text-gray-900 mb-1">Real-time tracking</p>
+                            <p className="text-sm text-gray-500">Watch the queue move in real-time. Know exactly how many people are ahead of you without checking in at the front desk.</p>
+                        </div>
+                    </div>
+
+                    {/*Feature 2*/}
+                    <div className="flex items-start gap-4 mb-6">
+                        <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style={{background:'#f3ebfa'}}>
+                            <span>💬</span>
+                        </div>
+                        <div>
+                            <p className="font-semibold text-gray-900 mb-1">Smart SMS Alerts</p>
+                            <p className="text-sm text-gray-500">Receive automated text messages when you're 2nd and 1st in line, giving you plenty of time to head to the clinic.</p>
+                        </div>
+                    </div>
+
+                    {/**Feature 3*/}
+                    <div className="flex items-start gap-4 mb-6">
+                        <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"style={{background:'#f3ebfa'}}>
+                            <span>🏠</span>
+                        </div>
+                        <div>
+                          <p className="font-semibold text-gray-900 mb-1">Digital Waiting Room</p>
+                          <p className="text-sm text-gray-500">The world is your waiting room. spend your wiat time at a nearby cafe or in the comfort of your own car.</p>
+                        </div>
+                    </div>
+                </div>
+                  {/* Right - Illustration placeholder */}
+                  <div className="w-96 h-80 rounded-2xl flex items-center justify-center text-gray-400"
+                    style={{background: '#f3ebfa', border: '1px solid #ede9fb'}}>
+                      Illustration
                     </div>
 
             </section>
