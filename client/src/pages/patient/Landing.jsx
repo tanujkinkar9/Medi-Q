@@ -165,6 +165,21 @@ function Landing(){
                     </div>
 
             </section>
+            {/*footer*/}
+            <section className="flex justify-between h-40" style={{background:'#fef7ff',border:'1px solid #ccc3d8'}}>
+                      <div className="">
+                    <p className="mt-10 pl-10 text-xl font-bold uppercase tracking-widest mb-3" style={{color:'#7c3aed'}}>
+                        Medi-Q
+                    </p>
+                    <h3 className="text-xm pl-9">@2026 Medi-Q health Systems.All rights reserved.</h3>
+                     </div>
+                     <div className=" flex text-xm text-gray-400 pt-15 pr-9 gap-6 align-items-center">
+                            <h3>Privacy Policy</h3>
+                            <h3>Terms of rvice</h3>
+                            <h3>Contact Support</h3>
+                            <h3>Clinic Login</h3>
+                     </div>
+            </section>
         </div>
     )
 }
