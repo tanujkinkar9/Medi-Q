@@ -165,21 +165,49 @@ function Landing(){
                     </div>
 
             </section>
-            {/*footer*/}
-            <section className="flex justify-between h-40" style={{background:'#fef7ff',border:'1px solid #ccc3d8'}}>
-                      <div className="">
-                    <p className="mt-10 pl-10 text-xl font-bold uppercase tracking-widest mb-3" style={{color:'#7c3aed'}}>
-                        Medi-Q
-                    </p>
-                    <h3 className="text-xm pl-9">@2026 Medi-Q health Systems.All rights reserved.</h3>
-                     </div>
-                     <div className=" flex text-xm text-gray-400 pt-15 pr-9 gap-6 align-items-center">
-                            <h3>Privacy Policy</h3>
-                            <h3>Terms of rvice</h3>
-                            <h3>Contact Support</h3>
-                            <h3>Clinic Login</h3>
-                     </div>
-            </section>
+            
+            {/* Footer */}
+<footer
+  className="border-t"
+  style={{ background: "#fef7ff", borderColor: "#d9d4e7" }}
+>
+  <div className="max-w-7xl mx-auto px-8 py-8 flex flex-col md:flex-row items-center justify-between">
+
+    {/* Left */}
+    <div>
+      <h2
+        className="text-2xl font-bold"
+        style={{ color: "#7c3aed" }}
+      >
+        MediQueue
+      </h2>
+
+      <p className="text-sm text-gray-500 mt-2">
+        © 2026 MediQueue Health Systems. All rights reserved.
+      </p>
+    </div>
+
+    {/* Right */}
+    <div className="flex flex-wrap gap-8 mt-6 md:mt-0 text-sm text-gray-600">
+      <a href="#" className="hover:text-violet-600 transition">
+        Privacy Policy
+      </a>
+
+      <a href="#" className="hover:text-violet-600 transition">
+        Terms of Service
+      </a>
+
+      <a href="#" className="hover:text-violet-600 transition">
+        Contact Support
+      </a>
+
+      <a href="#" className="hover:text-violet-600 transition">
+        Clinic Login
+      </a>
+    </div>
+
+  </div>
+</footer>
         </div>
     )
 }
