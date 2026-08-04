@@ -64,7 +64,21 @@ function Login(){
           </button>
          </div>
          {/*Footer Links*/}
-        </div>
+         <div className="text-center mt-6">
+            <div className="flex items-center justify-center gap-4 mb-2">
+                <a href="#" className="text-sm text-gray-500">Emergency Support</a>
+                <span className="text-gray-300">•</span>
+                <a href="#" className="text-sm text-gray-500">IT Helpdesk</a>
+                <span className="text-gray-300">•</span>
+                <a href="#" className="text-sm text-gray-500">Privacy Policy</a>
+                
+            </div>
+            <p className="text-xs text-gray-400 uppercase tracking-widest">
+                @2026 Medi_Q Health Systems
+                </p>
+            </div>
+         </div>
+
     )
 }
 
