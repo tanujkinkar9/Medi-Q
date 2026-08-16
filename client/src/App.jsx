@@ -4,6 +4,7 @@ import Login from './pages/staff/Login'
 import JoinQueue from './pages/patient/JoinQueue'
 import CreateAccount from './pages/patient/CreateAccount'
 import WaitingBoard from './pages/patient/WaitingBoard'
+import Doctor from './pages/staff/Doctor'
 
 
 
@@ -15,6 +16,7 @@ function App() {
       <Route path="/join" element={<JoinQueue/>}/>
       <Route path="/register" element={<CreateAccount/>}/>
       <Route path="/waiting"element={<WaitingBoard/>}/>
+      <Route path="/doctor"element={<Doctor/>}/>
       </Routes>
   )
 }
