@@ -3,7 +3,7 @@ import Landing from './pages/patient/Landing'
 import Login from './pages/staff/Login'
 import JoinQueue from './pages/patient/JoinQueue'
 import CreateAccount from './pages/patient/CreateAccount'
-import WaitingBoard from './pages/patient/WairingBoard'
+import WaitingBoard from './pages/patient/WaitingBoard'
 
 
 
