@@ -1,37 +1,11 @@
+import Sidebar from '../../components/Sidebar'
+
 function Receptionist() {
   return (
     <div className="flex min-h-screen" style={{background: '#faf9ff'}}>
 
       {/* Left Sidebar — same as Doctor */}
-      <aside className="w-60 bg-white flex flex-col"
-        style={{borderRight: '1px solid #ede9fb'}}>
-        <div className="px-6 py-5" style={{borderBottom: '1px solid #ede9fb'}}>
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl flex items-center justify-center"
-              style={{background: '#7c3aed'}}>
-              <span className="text-white text-lg">🏥</span>
-            </div>
-            <div>
-              <p className="font-bold text-sm" style={{color: '#7c3aed'}}>MediQueue Pro</p>
-              <p className="text-xs text-gray-400">Central Clinic Admin</p>
-            </div>
-          </div>
-        </div>
-        <nav className="flex flex-col gap-1 px-3 py-4 flex-1">
-          <a href="#" className="flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-gray-500">📊 Dashboard</a>
-          <a href="#" className="flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-semibold text-white"
-            style={{background: '#7c3aed'}}>📋 Live Queue</a>
-          <a href="#" className="flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-gray-500">👥 Patients</a>
-          <a href="#" className="flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-gray-500">👔 Staff Management</a>
-          <a href="#" className="flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-gray-500">📈 Reports</a>
-        </nav>
-        <div className="px-3 py-4" style={{borderTop: '1px solid #ede9fb'}}>
-          <a href="#" className="flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-semibold text-red-500 mb-2"
-            style={{background: '#fef2f2'}}>🔔 Urgent Alert</a>
-          <a href="#" className="flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-gray-500">❓ Support</a>
-          <a href="#" className="flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-gray-500">⚙️ Settings</a>
-        </div>
-      </aside>
+      <Sidebar activeLink="Live Queue"/>
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col">

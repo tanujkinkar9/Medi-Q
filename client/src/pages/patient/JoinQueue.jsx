@@ -1,5 +1,13 @@
 import waitingRoom from "../../assets/WaitingRoom.jpg";
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 function JoinQueue() {
+  const navigate = useNavigate()
+//use state
+  const [name, setName] = useState('')
+  const [phone, setPhone] = useState('')
+  const [token, setToken] = useState(null)
   return (
     <div className="min-h-screen bg-white">
 
@@ -35,6 +43,12 @@ function JoinQueue() {
           <input
             type="text"
             placeholder="Enter your name"
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value)
+              console.log(e.target.value)
+            }}
+            
             className="w-full px-4 py-3 rounded-lg text-gray-700 outline-none text-sm"
             style={{border: '1px solid #ede9fb', background: '#faf9ff'}}
           />
@@ -46,19 +60,44 @@ function JoinQueue() {
           <input
             type="tel"
             placeholder="(555) 000-0000"
+            value={phone}
+            onChange={(e) => {
+              setPhone(e.target.value)
+              console.log(e.target.value)
+            }}
+            
             className="w-full px-4 py-3 rounded-lg text-gray-700 outline-none text-sm"
             style={{border: '1px solid #ede9fb', background: '#faf9ff'}}
           />
         </div>
 
+
         {/* Join Queue Button */}
-        <button className="w-full py-3 rounded-lg text-white font-semibold mb-3"
+        <button 
+          onClick={() => {
+            if(name === '' || phone === ''){
+            alert('please fill all the fields')
+            return 
+            }
+            setToken('MQ-' + Math.floor(Math.random()*100))
+          }}
+          className="w-full py-3 rounded-lg text-white font-semibold mb-3"
           style={{background: 'linear-gradient(135deg, #7c3aed, #a78bfa)'}}>
           Join Queue
         </button>
+        {/*When the token is not null show this*/}
+        {token &&(
+          <div className="mt-4 =-4 mb-4 py-5 rounded-xl text-center"
+          style={{background:'#f3ebfa', border:'1px solid #ede9fb'}}>
+            <p className="text-sm text-gray-500">Your token is</p>
+            <p className="text-3xl font-bold" style={{color:'#7c3aed'}}>{token}</p>
+          </div>
+        )}
 
         {/* View Live Queue Button */}
-        <button className="w-full py-3 rounded-lg font-semibold mb-6"
+        <button 
+        onClick={() => navigate('/waiting')}
+        className="w-full py-3 rounded-lg font-semibold mb-6"
           style={{border: '2px solid #7c3aed', color: '#7c3aed', background: 'white'}}>
           View Live Queue
         </button>

@@ -1,4 +1,10 @@
+import { useState, useEffect } from 'react'
+
 function WaitingBoard() {
+
+    useEffect(() => {
+        console.log('Page load ho gaya - ab data fetch karenge')
+    }, [])
     return (
         <div className="min-h-screen pb-20"style={{background:'#faf9ff'}}>
             {/*Navabr*/}

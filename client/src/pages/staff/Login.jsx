@@ -1,6 +1,26 @@
+import { useState } from 'react'
+import axios from 'axios'
+
 function Login(){
+    const [role, setRole] = useState('')
+const [email, setEmail] = useState('')
+const [password, setPassword]= useState('')
+
+const handleSubmit = async (e) => {
+    e.preventDefault() 
+    try {
+        const res = await axios.post('http://localhost:5000/api/auth/login',{
+            email, password, role
+        })
+        console.log(res.data)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+
     return(
-        <div className="min-h-screen flex flex-col items-center justify-center" style={{background:'linear-gradient(to bottom, #f3ecfb,#ffffff'}}>
+        <div className="min-h-screen flex flex-col items-center justify-center" style={{background:'linear-gradient(to bottom, #f3ecfb,#ffffff)'}}>
          {/*Logo + Title*/}
         <div className="text-center mb-8">
             <span className="text-4xl">🏥</span>
@@ -10,15 +30,21 @@ function Login(){
         </div>
 
          {/*Card*/}
-         <div className="bg-white rounded-2xl p-8 w-full max-w-md"style={{border:'1px solid #ede9fb'}}>
+         <form 
+         onSubmit={handleSubmit}
+         className="bg-white rounded-2xl p-8 w-full max-w-md"style={{border:'1px solid #ede9fb'}}>
          
          {/*staff Role dropdown*/}
          <div className="mb-6">
             <label className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2 block">
                 Staff Role
             </label>
-            <select className="w-full px-4 py-3 rounded-lg text-gray-700 outline-none" style={{border:'1px solid #ede9fb', background: '#faf9ff'}}>
-                <option vlaue="">Select your role </option>
+            <select 
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            className="w-full px-4 py-3 rounded-lg text-gray-700 outline-none" 
+            style={{border:'1px solid #ede9fb', background: '#faf9ff'}}>
+                <option value="">Select your role </option>
                 <option value="doctor">Doctor</option>
                 <option value="receptionist">Receptionist</option>
                 <option value="admin">Admin</option>
@@ -35,6 +61,8 @@ function Login(){
                 <input
                 type="email"
                 placeholder= "name@clinic.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="bg-transparent outline-none text-gray-700 w-full text-sm"
                 />
             </div>
@@ -53,16 +81,20 @@ function Login(){
                 <input
                 type="password"
                 placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="bg-transparent outline-none text-gray-700 w-full text-sm"
                 />
                 <span className="text-gray-400 cursor-pointer">👁️</span>
             </div>
          </div>
          {/*Sign In button */}
-          <button className="w-full py-3 rounded-lg text-white font-semibold text-sm flex items-center justify-center gap-2"style={{background:'linear-gradient(135deg,#7c3aed,#a78bfa)'}}>
+          <button 
+          type="submit"
+          className="w-full py-3 rounded-lg text-white font-semibold text-sm flex items-center justify-center gap-2"style={{background:'linear-gradient(135deg,#7c3aed,#a78bfa)'}}>
             Sign-In →
           </button>
-         </div>
+         </form>
          {/*Footer Links*/}
          <div className="text-center mt-6">
             <div className="flex items-center justify-center gap-4 mb-2">
