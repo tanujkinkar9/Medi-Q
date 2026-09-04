@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 function Login(){
+    const navigate = useNavigate()
     const [role, setRole] = useState('')
-const [email, setEmail] = useState('')
-const [password, setPassword]= useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword]= useState('')
 
 const handleSubmit = async (e) => {
     e.preventDefault() 
@@ -13,6 +15,14 @@ const handleSubmit = async (e) => {
             email, password, role
         })
         console.log(res.data)
+        //redirect according to Role
+        if(role === 'doctor'){
+            navigate('/doctor')
+        } else if(role === 'receptionist'){
+            navigate('/receptionist')
+        }else if(role === 'admin'){
+            navigate('/staffmanagement')
+        }
     } catch (err) {
         console.log(err)
     }
