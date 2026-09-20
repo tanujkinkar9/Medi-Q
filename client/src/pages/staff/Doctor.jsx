@@ -1,5 +1,32 @@
 import Sidebar from '../../components/Sidebar'
+import axios from 'axios'
+import {useState, useEffect} from 'react'
+
 function Doctor() {
+    const [queueList,setQueueList] = useState([])
+    useEffect(() =>{
+        const fetchQueue = async () =>{
+            try {
+                const res = await axios.get('http://localhost:5000/api/queue/list')
+                setQueueList(res.data)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        fetchQueue()
+    },[])
+
+    //mark done
+    const markAsDone = async (id) => {
+        try {
+            await axios.put(`http://localhost:5000/api/queue/done/${id}`)
+            setQueueList(queueList.filter((patient) => patient._id !== id))
+        } catch (err) {
+            console.log(err)
+        }
+    }
+    const currentPatient = queueList[0]
+    const upNext = queueList.slice(1)
     return (
         <div className="flex min-h-screen" style={{background:'#faf9ff'}}>
 
@@ -48,29 +75,25 @@ function Doctor() {
                                 <div className="w-28 h-28 rounded-2xl flex flex-col items-center justify-center text-white"
                                 style={{background:'linear-gradient(160deg, #8b5cf6, #6d28d9)'}}>
                                     <span className="text-[10px] tracking-widest opacity-80">TOKEN</span>
-                                    <span className="text-2xl font-extrabold">B-42</span>
+                                    <span className="text-2xl font-extrabold">{currentPatient?.token}</span>
                                 </div>
                                 <div>
-                                    <h2 className="text-3xl font-extrabold text-gray-900 mb-2">Julianna Martinez</h2>
+                                    <h2 className="text-3xl font-extrabold text-gray-900 mb-2">{currentPatient?.name}</h2>
                                     <div className="flex items-center gap-4 text-sm text-gray-500">
-                                        <span>28 Years • Female</span>
-                                        <span>Last visit: 3 months ago</span>
+                                        <span>{currentPatient?.phone}</span>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="rounded-2xl p-5 mb-6" style={{background:'#faf9ff', border:'1px solid #ede9fb'}}>
-                                <p className="text-xs font-semibold text-gray-400 mb-2">REASON FOR VISIT</p>
-                                <p className="text-gray-700 leading-relaxed">
-                                    Persistent abdominal discomfort and mild nausea for the past 48 hours. No fever recorded.
-                                </p>
-                            </div>
-
                             <div className="flex items-center gap-3">
-                                <button className="px-6 py-3 rounded-xl border border-gray-200 font-semibold text-gray-700">
+                                <button 
+                                onClick={() => markAsDone(currentPatient?._id)}
+                                className="px-6 py-3 rounded-xl border border-gray-200 font-semibold text-gray-700">
                                     ✓ Done
                                 </button>
-                                <button className="flex-1 px-6 py-3 rounded-xl font-semibold text-white"
+                                <button 
+                                onClick={() => markAsDone(currentPatient?._id)}
+                                className="flex-1 px-6 py-3 rounded-xl font-semibold text-white"
                                 style={{background:'linear-gradient(90deg, #8b5cf6, #7c3aed)'}}>
                                     → Call Next
                                 </button>
@@ -104,32 +127,16 @@ function Doctor() {
                             <span className="text-xs font-semibold px-2.5 py-1 rounded-full" style={{background:'#f3effe', color:'#7c3aed'}}>3 TOTAL</span>
                         </div>
 
-                        <a href="#" className="flex items-center gap-3 p-3 rounded-xl mb-1">
-                            <span className="text-xs font-bold px-2 py-1.5 rounded-lg" style={{background:'#f3effe', color:'#7c3aed'}}>B-43</span>
-                            <div className="flex-1">
-                                <p className="text-sm font-semibold text-gray-900">Mark Wen</p>
-                                <p className="text-xs text-gray-400">Routine Checkup</p>
-                            </div>
-                            <span className="text-gray-300">›</span>
-                        </a>
-
-                        <a href="#" className="flex items-center gap-3 p-3 rounded-xl mb-1">
-                            <span className="text-xs font-bold px-2 py-1.5 rounded-lg" style={{background:'#f3effe', color:'#7c3aed'}}>B-44</span>
-                            <div className="flex-1">
-                                <p className="text-sm font-semibold text-gray-900">Sarah Jennings</p>
-                                <p className="text-xs text-gray-400">Follow-up: Lab results</p>
-                            </div>
-                            <span className="text-gray-300">›</span>
-                        </a>
-
-                        <a href="#" className="flex items-center gap-3 p-3 rounded-xl mb-3">
-                            <span className="text-xs font-bold px-2 py-1.5 rounded-lg" style={{background:'#f3effe', color:'#7c3aed'}}>B-45</span>
-                            <div className="flex-1">
-                                <p className="text-sm font-semibold text-gray-900">Omar Haddad</p>
-                                <p className="text-xs text-gray-400">Allergy Consultation</p>
-                            </div>
-                            <span className="text-gray-300">›</span>
-                        </a>
+                      {upNext.map((patient) => (
+                       <a key={patient._id} href="#" className="flex items-center gap-3 p-3 rounded-xl mb-1">
+                        <span className="text-xs font-bold px-2 py-1.5 rounded-lg" style={{background:'#f3effe',color:'#7c3aed'}}>{patient.token}</span>
+                        <div className="flex-1">
+                            <p className="text-sm font-semibold text-gray-900">{patient.name}</p>
+                            <p className="text-xs text-gray-400">{patient.phone}</p>
+                        </div>
+                        <span className="text-gray-300">,</span>
+                       </a>
+                      ))}
 
                         <button className="w-full text-sm font-semibold py-3 rounded-xl"
                         style={{border:'1px solid #e4defb', color:'#7c3aed'}}>
