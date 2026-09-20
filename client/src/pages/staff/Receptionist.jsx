@@ -1,6 +1,31 @@
 import Sidebar from '../../components/Sidebar'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 function Receptionist() {
+  
+  const [queueList, setQueueList] = useState([])
+
+  useEffect(() => {
+    const fetchQueue = async () => {
+      try {
+        const res = await axios.get('http://localhost:5000/api/queue/list')
+        setQueueList(res.data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    fetchQueue()
+  },[])
+
+  const markAsDone = async(id) => {
+    try {
+      await axios.put(`http://localhost:5000/api/queue/done/${id}`)
+      setQueueList(queueList.filter((patient) => patient._id !== id))
+    } catch (err) {
+      console.log(err)
+    }
+  }
   return (
     <div className="flex min-h-screen" style={{background: '#faf9ff'}}>
 
@@ -76,70 +101,33 @@ function Receptionist() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr style={{borderBottom: '1px solid #f5f3ff'}}>
-                    <td className="px-6 py-4 text-sm font-bold" style={{color: '#7c3aed'}}>#204</td>
-                    <td className="px-6 py-4">
-                      <p className="text-sm font-semibold text-gray-900">Johnathan Doe</p>
-                      <p className="text-xs text-gray-400">+1 234-567-890</p>
-                    </td>
-                    <td className="px-6 py-4"><span className="px-2 py-1 rounded-full text-xs font-semibold" style={{background: '#eff6ff', color: '#1d4ed8'}}>BOOKED</span></td>
-                    <td className="px-6 py-4"><span className="px-2 py-1 rounded-full text-xs font-semibold" style={{background: '#f0fdf4', color: '#15803d'}}>In Service</span></td>
-                    <td className="px-6 py-4">
-                      <div className="flex gap-2">
-                        <button className="p-1 rounded text-gray-400">⏸</button>
-                        <button className="p-1 rounded text-gray-400">⏭</button>
-                        <button className="p-1 rounded text-gray-400">🗑</button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr style={{borderBottom: '1px solid #f5f3ff'}}>
-                    <td className="px-6 py-4 text-sm font-bold" style={{color: '#7c3aed'}}>#205</td>
-                    <td className="px-6 py-4">
-                      <p className="text-sm font-semibold text-gray-900">Alice Smith</p>
-                      <p className="text-xs text-gray-400">+1 455-223-112</p>
-                    </td>
-                    <td className="px-6 py-4"><span className="px-2 py-1 rounded-full text-xs font-semibold" style={{background: '#f3ebfa', color: '#7c3aed'}}>WALK-IN</span></td>
-                    <td className="px-6 py-4"><span className="px-2 py-1 rounded-full text-xs font-semibold" style={{background: '#f3ebfa', color: '#7c3aed'}}>WAITING</span></td>
-                    <td className="px-6 py-4">
-                      <div className="flex gap-2">
-                        <button className="p-1 rounded text-gray-400">⏸</button>
-                        <button className="p-1 rounded text-gray-400">⏭</button>
-                        <button className="p-1 rounded text-gray-400">🗑</button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr style={{borderBottom: '1px solid #f5f3ff'}}>
-                    <td className="px-6 py-4 text-sm font-bold" style={{color: '#7c3aed'}}>#206</td>
-                    <td className="px-6 py-4">
-                      <p className="text-sm font-semibold text-gray-900">Robert Miller</p>
-                      <p className="text-xs text-gray-400">+1 889-112-445</p>
-                    </td>
-                    <td className="px-6 py-4"><span className="px-2 py-1 rounded-full text-xs font-semibold" style={{background: '#f3ebfa', color: '#7c3aed'}}>WALK-IN</span></td>
-                    <td className="px-6 py-4"><span className="px-2 py-1 rounded-full text-xs font-semibold" style={{background: '#f3ebfa', color: '#7c3aed'}}>WAITING</span></td>
-                    <td className="px-6 py-4">
-                      <div className="flex gap-2">
-                        <button className="p-1 rounded text-gray-400">⏸</button>
-                        <button className="p-1 rounded text-gray-400">⏭</button>
-                        <button className="p-1 rounded text-gray-400">🗑</button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4 text-sm font-bold" style={{color: '#7c3aed'}}>#207</td>
-                    <td className="px-6 py-4">
-                      <p className="text-sm font-semibold text-gray-900">Claire Lee</p>
-                      <p className="text-xs text-gray-400">+1 334-998-002</p>
-                    </td>
-                    <td className="px-6 py-4"><span className="px-2 py-1 rounded-full text-xs font-semibold" style={{background: '#eff6ff', color: '#1d4ed8'}}>BOOKED</span></td>
-                    <td className="px-6 py-4"><span className="px-2 py-1 rounded-full text-xs font-semibold" style={{background: '#f3ebfa', color: '#7c3aed'}}>WAITING</span></td>
-                    <td className="px-6 py-4">
-                      <div className="flex gap-2">
-                        <button className="p-1 rounded text-gray-400">⏸</button>
-                        <button className="p-1 rounded text-gray-400">⏭</button>
-                        <button className="p-1 rounded text-gray-400">🗑</button>
-                      </div>
-                    </td>
-                  </tr>
+                  {queueList.map((patient) => (
+                    <tr key={patient._id} style={{borderBottom:'1px solid #f5f3ff'}}>
+                      <td className="px-6 py-4 text-sm font-bold" style={{color: '#7c3aed'}}>{patient.token}</td>
+                      <td className="px-6 py-4">
+                        <p className="text-sm font-semibold text-gray-900">{patient.name}</p>
+                        <p className="text-xs text-gray-400">{patient.phone}</p>
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="px-2 py-1 rounded-full text-xs font-semibold" style={{background:'#f3ebfa',color:'#7c3aed'}}>
+                          WALK-IN
+                        </span>
+                      </td>
+                      <td className="px-6 py-4">
+                 <span className="px-2 py-1 rounded-full text-xs font-semibold" style={{background: '#f3ebfa', color: '#7c3aed'}}>
+                    {patient.status.toUpperCase()}
+                 </span>
+                     </td>
+                     <td className="px-6 py-4">
+                      <button
+                      onClick={() => markAsDone(patient._id)}
+                      className="px-3 py-1 rounded-lg text-xs font-semibold text-white"
+                      style={{background: '#15803d'}}>
+                       ✓ Done
+                      </button>
+                     </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
               <div className="flex items-center justify-between px-6 py-3"

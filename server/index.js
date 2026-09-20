@@ -14,6 +14,9 @@ app.get('/', (req, res) => {
 const authRoutes = require('./routes/authRoutes')
 app.use('/api/auth', authRoutes)
 
+const queueRoutes = require('./routes/queueRoutes')
+app.use('/api/queue',queueRoutes)
+
 const mongoose = require('mongoose')
 
 mongoose.connect(process.env.MONGO_URI)

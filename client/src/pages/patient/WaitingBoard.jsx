@@ -1,9 +1,20 @@
 import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 function WaitingBoard() {
 
+
+    const [queueList,setQueueList] = useState([])
     useEffect(() => {
-        console.log('Page load ho gaya - ab data fetch karenge')
+       const fetchQueue = async () => {
+        try {
+            const res = await axios.get('http://localhost:5000/api/queue/list')
+            setQueueList(res.data)
+        } catch (err) {
+            console.log(err)
+        }
+       }
+       fetchQueue()
     }, [])
     return (
         <div className="min-h-screen pb-20"style={{background:'#faf9ff'}}>
@@ -33,7 +44,7 @@ function WaitingBoard() {
                 </div>
                 <div className="flex-1 bg-white rounded-xl p-4" style={{border:'1px solid #ede9fb'}}>
                     <p className="text-sm text-gray-500 mb-1">Patients Waiting</p>
-                    <p className="text-2xl font-bold text-gray-900">18</p>
+                    <p className="text-2xl font-bold text-gray-900">{queueList.length}</p>
                 </div>
             </div>
             {/*Next Expected Call*/}
@@ -70,36 +81,19 @@ function WaitingBoard() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr style={{borderBottom:'1px solid #f5f3ff',backgroud:'#faf9ff'}}>
-                        <td className="px-4 py-3 text-sm text-gray-400">--</td>
-                        <td className="px-4 py-3 text-sm font-bold"style={{color:'#7c3aed'}}>M-402</td>
-                        <td className="px-4 py-3 text-sm text-gray-500">4 min</td>
-                        <td className="px-4 py-3"><span className="px-2 py-1 rounded-full text-xs font-semibold"style={{background:'#f3ebfa',color:'#7c3aed'}}>WAITING</span></td>
-                        </tr>
-                        <tr style={{borderBottom:'1px solid #f5f3ff'}}>
-                            <td className="px-4 py-3 text-sm text-gray-700">1</td>
-                            <td className="px-4 py-3 text-sm font-semibold text-gray-900">A-112</td>
-                            <td className="px-4 py-3 text-sm text-gray-500">4 min</td>
-                            <td className="px-4 py-3"><span className="px-2 py-1 rounded-full text-xs font-semibold"style={{background:'#f3ebfa',color:'#7c3aed'}}>WAITING</span></td>
-                        </tr>
-                        <tr style={{borderBottom:'1px solid #f5f3ff'}}>
-                            <td className="px-4 py-3 text-sm text-gray-700">2</td>
-                            <td className="px-4 py-3 text-sm font-semibold text-gray-900">A-113</td>
-                            <td className="px-4 py-3 text-sm text-gray-500">9 min</td>
-                            <td className="px-4 py-3"><span className="px-2 py-1 rounded-full text-xs font-semibold"style={{background:'#f3ebfa',color:'#7c3aed'}}>WAITING</span></td>
-                        </tr>
-                        <tr style={{borderBottom:'1px solid #f5f3ff'}}>
-                            <td className="px-4 py-3 text-sm text-gray-400">--</td>
-                            <td className="px-4 py-3 text-sm font-semibold text-gray-900">M-398</td>
-                            <td className="px-4 py-3 text-sm text-gray-500">Paused</td>
-                            <td className="px-4 py-3"><span className="px-2 py-1 rounded-full text-xs font-semibold" style={{background: '#fef9ee' , color:'#b45309'}}>ON HOLD</span></td>
-                        </tr>
-                        <tr style={{borderBottom:'1px solid #f5f3ff'}}>
-                            <td className="px-4 py-3 text-gray-700">3</td>
-                            <td className="px-4 py-3 text-sm font-semibold text-gray-900">B-024</td>
-                            <td className="px-4 py-3 text-sm text-gray-500">15 min</td>
-                            <td className="px-4 py-3"><span className="px-2 py-1 rounded-full text-xs font-semibold" style={{background:'#f3ebfa' , color:'#7c3aed'}}>WAITING</span></td>
-                        </tr>
+                        {queueList.map((patient, index) =>(
+                            <tr key = {patient._id} style = {{borderBottom:'1px solid #f5f3ff'}}>
+                                <td className="px-4 py-3 text-sm text-gray-700">{index+1}</td>
+                                <td className="px-4 py-3 text-sm font-semibold text-gray-900">{patient.token}</td>
+                                <td className="px-4 py-3 text-sm text-gray-500">--</td>
+                                <td className="px-4 py-3">
+                                    <span className="px-2 py-1 rounded-full text-xs font-semibold" style={{background:'#f3ebfa',color:'#7c3aed'}}>
+                                        {patient.status.toUpperCase()}
+                                    </span>
+                                </td>
+                            </tr>
+                        )
+                        )}
                     </tbody>
                 </table>
                 <p className="text-xs text-gray-400 text-center py-3">Showing first 8 patients. Swipe or scroll for more.</p>
