@@ -15,7 +15,15 @@ function Doctor() {
         }
         fetchQueue()
     },[])
+    //in-progress
+    const callNext = async (id) => {
+        try {
+            await axios.put(`http://localhost:5000/api/queue/status/${id}`,{status:'in-progress'})
 
+        } catch (err) {
+            console.log(err)
+        }
+    }
     //mark done
     const markAsDone = async (id) => {
         try {

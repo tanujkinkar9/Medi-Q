@@ -42,4 +42,14 @@ const markDone = async (req, res) => {
   }
 }
 
-module.exports = { joinQueue, getQueue,markDone }
+const updateStatus = async (req, res) => {
+  try {
+    const { id } = req.params
+    const { status } = req.body
+    const updated = await Queue.findByAndUpdate(id, { status},{new:true})
+    res.status(200).json(updated)
+  } catch(err) {
+    res.status(500).json({message: 'Server error',error: err.message})
+  }
+}
+module.exports = { joinQueue, getQueue,markDone, updateStatus }

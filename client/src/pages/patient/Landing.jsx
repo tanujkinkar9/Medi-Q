@@ -1,4 +1,6 @@
+import { useNavigate } from 'react-router-dom'
 function Landing() {
+  const navigate = useNavigate()
   return (
     <div className="min-h-screen bg-white text-gray-900">
 
@@ -19,19 +21,12 @@ function Landing() {
               className="font-bold text-xl"
               style={{ color: "#630ed4" }}
             >
-              Medi-Q
+              MediQ
             </span>
           </a>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8 text-sm font-medium">
-            <a
-              href="#queue"
-              className="hover:text-violet-600 transition"
-            >
-              Queue
-            </a>
-
             <a
               href="#features"
               className="text-gray-500 hover:text-violet-600 transition"
@@ -56,16 +51,12 @@ function Landing() {
 
           {/* Right */}
           <div className="flex items-center gap-3">
-
-            <button className="hidden sm:block text-gray-600 text-sm font-medium hover:text-violet-600">
-              Login
-            </button>
-
             <button
+              onClick ={() => navigate('/login')}
               className="text-white px-5 py-2.5 rounded-xl text-sm font-semibold shadow-sm hover:opacity-90 transition"
               style={{ background: "#7c3aed" }}
             >
-              Sign Up
+              Login
             </button>
 
           </div>
@@ -111,7 +102,7 @@ function Landing() {
                 Smart Healthcare Queue
               </div>
 
-              <h1 className="text-5xl lg:text-7xl font-bold tracking-tight leading-[1.05]">
+              <h1 className="text-5xl lg:text-7xl font-bold tracking-tight ">
                 Clinic visits,
                 <br />
                 <span style={{ color: "#7c3aed" }}>
@@ -128,6 +119,7 @@ function Landing() {
               <div className="flex flex-col sm:flex-row gap-4 mt-9">
 
                 <button
+                  onClick={() => navigate('/join')}
                   className="px-7 py-3.5 rounded-xl text-white font-semibold shadow-lg hover:opacity-90 transition"
                   style={{ background: "#7c3aed" }}
                 >
@@ -135,6 +127,7 @@ function Landing() {
                 </button>
 
                 <button
+                  onClick ={() => navigate('/login')}
                   className="px-7 py-3.5 rounded-xl font-semibold border bg-white hover:bg-gray-50 transition"
                   style={{
                     borderColor: "#ddd6fe",
@@ -177,7 +170,7 @@ function Landing() {
                     </p>
 
                     <h3 className="font-bold text-lg mt-1">
-                      Sunrise Care Clinic
+                      Vijay care clinic
                     </h3>
                   </div>
 
@@ -206,7 +199,7 @@ function Landing() {
                     className="text-5xl font-bold mt-2"
                     style={{ color: "#7c3aed" }}
                   >
-                    B-15
+                    MQ-015
                   </p>
 
                   <p className="text-sm text-gray-500 mt-2">
@@ -803,6 +796,7 @@ function Landing() {
               </p>
 
               <button
+                onClick ={() => navigate('/join')}
                 className="mt-7 px-6 py-3 rounded-xl text-white font-semibold"
                 style={{ background: "#7c3aed" }}
               >
@@ -871,7 +865,7 @@ function Landing() {
                 </p>
             </div>
             {/*Pricing card*/}
-            <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto mt-16">
+            <div className="grid md:grid-cols-2 gap-4 max-w-6xl mx-auto mt-16">
                 {/*FREE TRAIL*/}
                 <div className="rounded-3xl border border-gray-200 p-8 bg-white">
                     <div>
@@ -982,7 +976,7 @@ function Landing() {
                         ))}
                     </div>
                 </div>
-                {/*================ENTERPRIC==============*/}
+                {/*================ENTERPRIC==============
                 <div className="rounded-3xl border border-gray-200 p-8 bg-white">
                     <div>
                         <p className="text-lg font-bold">
@@ -1034,7 +1028,7 @@ function Landing() {
                             </div>
                         ))}
                     </div>
-                </div>
+                </div>*/}
 
             </div>
             {/*Bottom Note*/}
@@ -1068,11 +1062,15 @@ function Landing() {
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">
 
-            <button className="px-7 py-3.5 rounded-xl bg-white font-semibold text-violet-700 hover:bg-gray-100 transition">
+            <button 
+            onClick ={() => navigate('/join')}
+            className="px-7 py-3.5 rounded-xl bg-white font-semibold text-violet-700 hover:bg-gray-100 transition">
               Join a Queue
             </button>
 
-            <button className="px-7 py-3.5 rounded-xl border border-white/30 font-semibold hover:bg-white/10 transition">
+            <button 
+              onClick ={() => navigate('/login')}
+              className="px-7 py-3.5 rounded-xl border border-white/30 font-semibold hover:bg-white/10 transition">
               Get Medi-Q for your Clinic
             </button>
 
@@ -1106,14 +1104,14 @@ function Landing() {
                   className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold"
                   style={{ background: "#7c3aed" }}
                 >
-                  M
+                  B
                 </div>
 
                 <h2
                   className="text-xl font-bold"
                   style={{ color: "#7c3aed" }}
                 >
-                  Medi-Q
+                  BAARI
                 </h2>
 
               </div>
@@ -1155,6 +1153,7 @@ function Landing() {
               </a>
 
               <a
+                onClick = {(e) => { e.preventDefault(); navigate('/login')}}
                 href="#"
                 className="hover:text-violet-600 transition"
               >
