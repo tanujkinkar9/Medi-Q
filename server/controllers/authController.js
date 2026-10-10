@@ -1,5 +1,6 @@
 const User = require('../models/User')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const signupUser = async( req, res) => {
     try {
@@ -42,7 +43,17 @@ const loginUser = async (req, res) => {
         if(user.role !== role) {
             return res.status(400).json({ message: 'Role does not match'})
         }
-
+        
+        const token = jwt.sign(
+            { id: user._id, role: user.role },
+            process.env.JWT_SECRET,
+            { expiresIn: '8h'}
+        )
+        res.cookie('token', token, {
+            httpOnly: true,
+            sameSite: 'strict',
+            maxAge: 8 * 60 * 60 * 1000
+        })
         res.status(200).json({
             message: 'Login successful',
             user: { email: user.email, role: user.role }
